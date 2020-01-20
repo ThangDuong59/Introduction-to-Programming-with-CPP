@@ -1,0 +1,183 @@
+#include <iostream>
+
+using namespace std;
+
+struct DOIBONG
+{
+    string ten;
+    int sotran = 0, diemso = 0, sobanthang = 0, sobanthua = 0, hieuso = 0, thang = 0, thua = 0, hoa = 0;
+};
+
+void nhapten(DOIBONG a[], int &n)
+{
+    cout<<"Nhap so doi bong: " ;
+    cin>>n;
+    cout<<endl;
+    for(int i = 0; i < n; i++)
+    {
+       cout<<"Nhap ten doi bong thu "<<i<<" : ";
+       cin>>a[i].ten;
+    }
+    cout<<endl;
+}
+
+void nhaptisovatinhdiem(DOIBONG a[], int n)
+{
+    int diem[1000];
+    for(int i = 0; i < n;i++)
+        for(int j = i + 1; j < n; j++)
+        {
+            cout<<a[i].ten<<" - "<<a[j].ten<<" : ";
+            cin>>diem[i];
+            cin>>diem[j];
+            a[i].sobanthang += diem[i];
+            a[j].sobanthang += diem[j];
+            a[i].sobanthua += diem[j];
+            a[j].sobanthua += diem[i];
+            a[i].hieuso += a[i].sobanthang - a[i].sobanthua ;
+            a[j].hieuso += a[j].sobanthua - a[j].sobanthua ;
+            if (diem[i] > diem[j])
+            {
+                a[i].diemso += 3;
+                a[i].thang += 1;
+                a[j].thua += 1;
+            }
+            else if(diem[i] == diem[j])
+            {
+                a[i].diemso += 1;
+                a[j].diemso += 1;
+                a[i].hoa += 1;
+                a[j].hoa += 1;
+            }
+            else
+            {
+                a[j].diemso += 3;
+                a[i].thua += 1;
+                a[j].thang += 1;
+            }
+            a[i].sotran += 1;
+            a[j].sotran += 1;
+        }
+    cout<<endl;
+}
+
+void xephang (DOIBONG a[], int n)
+{
+    string tempten ;
+    int tempdiemso, tempsobanthang, tempsobanthua, temphieuso, tempsotran, tempthang, tempthua, temphoa ;
+    for(int i = 0; i < n; i++)
+        for(int j = i + 1; j < n; j++)
+        {
+            if( a[j].diemso > a[i].diemso )
+            {
+                tempten = a[i].ten ;
+                a[i].ten = a[j].ten ;
+                a[j].ten = tempten ;
+                tempsotran = a[i].sotran ;
+                a[i].sotran = a[j].sotran ;
+                a[j].sotran = tempsotran;
+                tempdiemso = a[i].diemso;
+                a[i].diemso = a[j].diemso;
+                a[j].diemso = tempdiemso;
+                tempsobanthang = a[i].sobanthang;
+                a[i].sobanthang = a[j].sobanthang;
+                a[j].sobanthang = tempsobanthang;
+                tempsobanthua = a[i].sobanthua;
+                a[i].sobanthua = a[j].sobanthua;
+                a[j].sobanthua = tempsobanthua;
+                temphieuso = a[i].hieuso ;
+                a[i].hieuso = a[j].hieuso ;
+                a[j].hieuso = temphieuso;
+                tempthang = a[i].thang;
+                a[i].thang = a[j].thang ;
+                a[j].thang = tempthang ;
+                tempthua = a[i].thua ;
+                a[i].thua = a[j].thua ;
+                a[j].thua = tempthua ;
+                temphoa = a[i].hoa ;
+                a[i].hoa = a[j].hoa ;
+                a[j].hoa = temphoa ;
+            }
+            else if (a[i].diemso == a[j].diemso && a[j].hieuso > a[i].hieuso)
+            {
+                tempten = a[i].ten ;
+                a[i].ten = a[j].ten ;
+                a[j].ten = tempten ;
+                tempsotran = a[i].sotran ;
+                a[i].sotran = a[j].sotran ;
+                a[j].sotran = tempsotran;
+                tempdiemso = a[i].diemso;
+                a[i].diemso = a[j].diemso;
+                a[j].diemso = tempdiemso;
+                tempsobanthang = a[i].sobanthang;
+                a[i].sobanthang = a[j].sobanthang;
+                a[j].sobanthang = tempsobanthang;
+                tempsobanthua = a[i].sobanthua;
+                a[i].sobanthua = a[j].sobanthua;
+                a[j].sobanthua = tempsobanthua;
+                temphieuso = a[i].hieuso ;
+                a[i].hieuso = a[j].hieuso ;
+                a[j].hieuso = temphieuso;
+                tempthang = a[i].thang;
+                a[i].thang = a[j].thang ;
+                a[j].thang = tempthang ;
+                tempthua = a[i].thua ;
+                a[i].thua = a[j].thua ;
+                a[j].thua = tempthua ;
+                temphoa = a[i].hoa ;
+                a[i].hoa = a[j].hoa ;
+                a[j].hoa = temphoa ;
+            }
+            else if (a[i].diemso == a[j].diemso && a[j].hieuso > a[i].hieuso && a[j].sobanthang > a[i].sobanthang)
+            {
+                tempten = a[i].ten ;
+                a[i].ten = a[j].ten ;
+                a[j].ten = tempten ;
+                tempsotran = a[i].sotran;
+                a[i].sotran = a[j].sotran;
+                a[j].sotran = tempsotran;
+                tempdiemso = a[i].diemso;
+                a[i].diemso = a[j].diemso;
+                a[j].diemso = tempdiemso;
+                tempsobanthang = a[i].sobanthang;
+                a[i].sobanthang = a[j].sobanthang;
+                a[j].sobanthang = tempsobanthang;
+                tempsobanthua = a[i].sobanthua;
+                a[i].sobanthua = a[j].sobanthua;
+                a[j].sobanthua = tempsobanthua;
+                temphieuso = a[i].hieuso;
+                a[i].hieuso = a[j].hieuso;
+                a[j].hieuso = temphieuso;
+                tempthang = a[i].thang;
+                a[i].thang = a[j].thang ;
+                a[j].thang = tempthang ;
+                tempthua = a[i].thua ;
+                a[i].thua = a[j].thua ;
+                a[j].thua = tempthua ;
+                temphoa = a[i].hoa ;
+                a[i].hoa = a[j].hoa ;
+                a[j].hoa = temphoa ;
+            }
+        }
+    cout<<" BANG XEP HANG "<<endl;
+    cout<<"Tu trai qua phai: "<<endl;
+    cout <<"HANG DOI SOTRAN THANG THUA HOA DIEMSO SOBANTHANG SOBANTHUA HIEUSO" << endl<<endl <<endl;
+    int j = 0 ;
+    for (int i = 0; i < n; i++)
+    {
+       if ( i > 0 && i < n && a[i].diemso == a[i-1].diemso && a[i].hieuso == a[i-1].hieuso && a[i].sobanthang == a[i-1].sobanthang)
+           j = j;
+        else j += 1 ;
+        cout << j << "\t" << a[i].ten << "\t" << a[i].sotran << "\t" <<a[i].thang<< "\t" << a[i].thua << "\t" <<a[i].hoa<< "\t" << a[i].diemso << "\t" << a[i].sobanthang << "\t" << a[i].sobanthua << "\t" << a[i].hieuso << endl;
+    }
+}
+
+int main()
+{
+    int n;
+    DOIBONG a[100];
+    nhapten(a,n);
+    nhaptisovatinhdiem(a,n);
+    xephang(a, n);
+    return 0;
+}
