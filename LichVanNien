@@ -1,0 +1,353 @@
+#include <iostream>
+
+using namespace std;
+
+struct NGAY
+{
+    int ngay, thang, nam ;
+};
+
+bool checknamnhuan(int x)
+{
+    if(x%100 == 0)
+    {
+        if(x%400 == 0)
+         return 1;
+        else return 0 ;
+    }
+    else if(x%4 == 0)
+        return 1;
+    else return 0;
+}
+
+void timthucuangaydanhap()
+{
+    NGAY a;
+    cout<<"Nhap ngay thang nam: "<<endl;
+    cout<<"Nhap ngay: ";
+    cin>>a.ngay;
+    cout<<"Nhap thang: ";
+    cin>>a.thang;
+    while(a.thang <= 0 || a.thang > 12)
+    {
+        cout<<"Nhap lai thang: ";
+        cin>>a.thang;
+    }
+    cout<<"Nhap nam: ";
+    cin>>a.nam;
+    while(a.nam <= 0)
+    {
+        cout<<"Nhap lai nam: ";
+        cin>>a.nam ;
+    }
+    if(a.thang == 2 && checknamnhuan(a.nam) == 0 && a.ngay > 28)
+        while(a.ngay <= 0 ||a.ngay > 28)
+        {
+            cout<<"Nhap lai ngay: ";
+            cin>>a.ngay;
+        }
+    else if(a.thang == 2 && checknamnhuan(a.nam) == 1 && a.ngay > 29)
+        while(a.ngay <= 0 || a.ngay > 29)
+    {
+        cout<<"Nhap lai ngay: ";
+        cin>>a.ngay;
+    }
+    if(a.thang == 1 || a.thang == 3 || a.thang == 5 || a.thang == 7 || a.thang == 8 || a.thang == 10 || a.thang == 12)
+        while(a.ngay <= 0 || a.thang > 31)
+    {
+        cout<<"Nhap lai ngay: ";
+        cin>>a.ngay;
+    }
+    if(a.thang == 4 || a.thang == 6 || a.thang == 9 || a.thang == 11)
+        while(a.ngay <= 0 | a.thang > 30)
+    {
+        cout<<"Nhap lai ngay: ";
+        cin>>a.ngay;
+    }
+    int c = 0;
+    for(int i = 1; i < a.thang; i++)
+        if (checknamnhuan(a.nam) == 1)
+        {
+           if (i%2 != 0 && i < 8 )
+            c += 31 ;
+            else if(i%2 != 0 && i > 8)
+             c+= 30;
+           else if (i%2 == 0 && i < 7 && i != 2)
+            c += 30 ;
+           else if(i%2 == 0 && i > 7)
+            c += 31;
+           else if(i == 2)
+            c += 29 ;
+        }
+        else
+        {
+           if (i%2 != 0 && i < 8 )
+            c += 31 ;
+            else if(i%2 != 0 && i > 8)
+             c+= 30;
+           else if (i%2 == 0 && i < 7 && i != 2)
+            c += 30 ;
+           else if(i%2 == 0 && i > 7)
+            c += 31;
+           else if(i == 2)
+            c += 28 ;
+        }
+    c += a.ngay ;
+    int S = (a.nam + (a.nam - 1)/4 - (a.nam - 1)/100 + (a.nam - 1)/400 + c)%7 ;
+    switch(S)
+    {
+      case 1: {cout<<"Ngay "<<a.ngay<<" thang "<<a.thang<<" nam "<<a.nam<<" la chu nhat ! "<<endl; break; }
+      case 2: {cout<<"Ngay "<<a.ngay<<" thang "<<a.thang<<" nam "<<a.nam<<" la thu hai ! "<<endl; break; }
+      case 3: {cout<<"Ngay "<<a.ngay<<" thang "<<a.thang<<" nam "<<a.nam<<" la thu ba ! "<<endl;break;}
+      case 4: {cout<<"Ngay "<<a.ngay<<" thang "<<a.thang<<" nam "<<a.nam<<" la thu tu ! "<<endl;break;}
+      case 5: {cout<<"Ngay "<<a.ngay<<" thang "<<a.thang<<" nam "<<a.nam<<" la thu nam ! "<<endl;break;}
+      case 6: {cout<<"Ngay "<<a.ngay<<" thang "<<a.thang<<" nam "<<a.nam<<" la thu sau ! "<<endl;break;}
+      case 0: {cout<<"Ngay "<<a.ngay<<" thang "<<a.thang<<" nam "<<a.nam<<" la thu bay ! "<<endl;break;}
+    }
+    cout<<endl;
+}
+
+int checkthu(NGAY a)
+{
+    int c = 0;
+    for(int i = 1; i < a.thang; i++)
+        if (checknamnhuan(a.nam) == 1)
+        {
+           if (i%2 != 0 && i < 8 )
+            c += 31 ;
+            else if(i%2 != 0 && i > 8)
+             c+= 30;
+           else if (i%2 == 0 && i < 7 && i != 2)
+            c += 30 ;
+           else if(i%2 == 0 && i > 7)
+            c += 31;
+           else if(i == 2)
+            c += 29 ;
+        }
+        else
+        {
+           if (i%2 != 0 && i < 8 )
+            c += 31 ;
+            else if(i%2 != 0 && i > 8)
+             c+= 30;
+           else if (i%2 == 0 && i < 7 && i != 2)
+            c += 30 ;
+           else if(i%2 == 0 && i > 7)
+            c += 31;
+           else if(i == 2)
+            c += 28 ;
+        }
+    c += a.ngay ;
+    int S = (a.nam + (a.nam - 1)/4 - (a.nam - 1)/100 + (a.nam - 1)/400 + c)%7 ;
+    switch(S)
+    {
+        case 1: {return 1; break;}
+        case 2: {return 2; break;}
+        case 3: {return 3; break;}
+        case 4: {return 4; break;}
+        case 5: {return 5; break;}
+        case 6: {return 6; break;}
+        case 7: {return 7; break;}
+    }
+}
+
+int checkthucuangay(NGAY a)
+{
+    int c = 0;
+    for(int i = 1; i < a.thang; i++)
+        if (checknamnhuan(a.nam) == 1)
+        {
+           if (i%2 != 0 && i < 8 )
+            c += 31 ;
+            else if(i%2 != 0 && i > 8)
+             c+= 30;
+           else if (i%2 == 0 && i < 7 && i != 2)
+            c += 30 ;
+           else if(i%2 == 0 && i > 7)
+            c += 31;
+           else if(i == 2)
+            c += 29 ;
+        }
+        else
+        {
+           if (i%2 != 0 && i < 8 )
+            c += 31 ;
+            else if(i%2 != 0 && i > 8)
+             c+= 30;
+           else if (i%2 == 0 && i < 7 && i != 2)
+            c += 30 ;
+           else if(i%2 == 0 && i > 7)
+            c += 31;
+           else if(i == 2)
+            c += 28 ;
+        }
+    c += 1 ;
+    int S = (a.nam + (a.nam - 1)/4 - (a.nam - 1)/100 + (a.nam - 1)/400 + c)%7 ;
+    switch(S)
+    {
+        case 1: {return 1; break;}
+        case 2: {return 2; break;}
+        case 3: {return 3; break;}
+        case 4: {return 4; break;}
+        case 5: {return 5; break;}
+        case 6: {return 6; break;}
+        case 7: {return 7; break;}
+    }
+}
+
+void xuatlichcuathang()
+{
+    int a[50][100];
+    NGAY b;
+    cout<<"Nhap thang: ";
+    cin>>b.thang;
+    while(b.thang < 1 || b.thang > 12)
+    {
+        cout<<"Nhap lai thang: ";
+        cin>>b.thang;
+    }
+    cout<<"Nhap nam: ";
+    cin>>b.nam;
+    while(b.nam <= 0)
+    {
+        cout<<"Nhap lai nam: ";
+        cin>>b.nam ;
+    }
+    int k = 1 ;
+    string c[100];
+    if((b.thang%2 != 0 && b.thang < 8) || (b.thang%2 == 0 && b.thang >= 8))
+          for(int i = 0; i <= 6*7 ; i++)
+          {
+              if(i >= 0 && i%7 + 1 < checkthucuangay(b) && i < 6)
+                a[i/7][i%7] = 0;
+              else
+              {
+                a[i/7][i%7] = k ;
+                k += 1 ;
+                if(k > 31)
+                    break ;
+              }
+          }
+    else if((b.thang%2 != 0 && b.thang > 8) || (b.thang%2 == 0 && b.thang < 8 && b.thang != 2))
+       for(int i = 0; i <= 6*7 ; i++)
+          {
+              if(i >= 0 && i%7 + 1 < checkthucuangay(b) && i < 6)
+                a[i/7][i%7] = 0;
+              else
+              {
+                a[i/7][i%7] = k ;
+                k += 1 ;
+                if(k > 30)
+                    break ;
+              }
+          }
+       else
+       {
+         if(checknamnhuan(b.nam) == 1)
+           for(int i = 0; i <= 6*7 ; i++)
+          {
+              if(i >= 0 && i%7 + 1 < checkthucuangay(b) && i < 6)
+                a[i/7][i%7] = 0;
+              else
+              {
+                a[i/7][i%7] = k ;
+                k += 1 ;
+                if(k > 29)
+                    break ;
+              }
+          }
+            else
+               for(int i = 0; i <= 6*7  ; i++)
+          {
+              if(i >= 0 && i%7 + 1 < checkthucuangay(b) && i < 6)
+                a[i/7][i%7] = 0;
+              else
+              {
+                a[i/7][i%7] = k ;
+                k += 1 ;
+                if(k > 28)
+                    break ;
+              }
+          }
+       }
+    c[0] = "Su";
+    c[1] = "Mo";
+    c[2] = "Tu";
+    c[3] = "We";
+    c[4] = "Th";
+    c[5] = "Fr";
+    c[6] = "Sa";
+    for(int i = 0 ; i < 7; i++)
+        cout<<c[i]<<"\t" ;
+    cout<<endl;
+    for(int i = 0; i < 6; i++)
+    {
+        for(int j = 0; j < 7; j++)
+            if(a[i][j] == 0)
+            cout<<"\t " ;
+        else
+            cout<<a[i][j]<<"\t";
+        cout<<endl;
+    }
+    cout<<endl;
+}
+
+void canchi()
+{
+    NGAY c;
+    cout<<"Nhap nam: ";
+    cin>>c.nam;
+    while(c.nam <= 0)
+    {
+        cout<<"Nhap lai nam: ";
+        cin>>c.nam;
+    }
+    int can, chi ;
+    if (c.nam < 10)
+    {
+        can = c.nam ;
+        chi = c.nam ;
+    }
+    else
+    {
+        can = c.nam%10 ;
+        chi = c.nam%12 ;
+    }
+    switch(can)
+    {
+        case 0: {cout<<"Canh ";break;}
+        case 1: {cout<<"Tan ";break;}
+        case 2: {cout<<"Nham ";break;}
+        case 3: {cout<<"Quy ";break;}
+        case 4: {cout<<"Giap ";break;}
+        case 5: {cout<<"At ";break;}
+        case 6: {cout<<"Binh ";break;}
+        case 7:{cout<<"Dinh ";break;}
+        case 8:{cout<<"Mau ";break;}
+        case 9:{cout<<"Ky ";break;}
+    }
+    switch(chi)
+    {
+        case 0: {cout<<"Than ";break;}
+        case 1: {cout<<"Dau ";break;}
+        case 2: {cout<<"Tuat ";break;}
+        case 3: {cout<<"Hoi ";break;}
+        case 4: {cout<<"Ty' ";break;}
+        case 5: {cout<<"Suu ";break;}
+        case 6: {cout<<"Dan ";break;}
+        case 7: {cout<<"Mao ";break;}
+        case 8: {cout<<"Thin ";break;}
+        case 9: {cout<<"Ty. ";break;}
+        case 10: {cout<<"Ngo ";break;}
+        case 11: {cout<<"Mui ";break;}
+    }
+    cout<<endl;
+}
+
+int main()
+{
+    timthucuangaydanhap();
+    xuatlichcuathang();
+    canchi();
+    return 0;
+}
