@@ -1,0 +1,38 @@
+#include <iostream>
+using namespace std;
+
+struct DOIBONG
+{
+	string ten;
+	int sotran, diemso, hieuso;
+	int sobanthang[1000];
+	int sobanthua[1000];
+};
+
+void nhapten(DOIBONG a[], int &n)
+{
+	cout << "Nhap so doi bong: ";
+	cin >> n;
+	cout << "Nhap ten cac doi bong: " << endl;
+	for (int i = 0; i < n; i++)
+	{
+		cout << "Doi bong thu " << i << " : ";
+		cin >> a[i].ten;
+	}
+	cout << endl;
+}
+
+void nhaptiso(DOIBONG a[], int n)
+{
+	for (int i = 0; i < n; i++)
+		for (int j = i + 1; j < n; j++)
+			cout << a[i].ten << " - " << a[j].ten << " : ";
+}
+
+int main()
+{
+	int n;
+	DOIBONG a[1000];
+	nhapten(a, n);
+	return 0;
+}
