@@ -1,0 +1,58 @@
+#include <iostream>
+using namespace std;
+
+void PrintMatrix(int a[][100], int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+            cout << a[i][j] << " ";
+        cout << endl;
+    }
+}
+
+void CreateSpiralArray(int a[][100], int n)
+{
+    int temprow = 0, tempcol = 0, tempnum = 1, temp = n;
+    for (int i = 1; i <= n * n ; i++)
+    {
+        if (temprow == n - temp && tempcol < temp - 1)
+        {
+            a[temprow][tempcol] = tempnum;
+            if (tempcol == temp - 2)
+                a[temprow][tempcol + 1] = tempnum + 1;
+            tempcol++;
+        }
+        else if (tempcol == temp - 1 && temprow < temp - 1)
+        {
+            a[temprow][tempcol] = tempnum;
+            temprow++;
+            if (temprow == temp - 1)
+                a[temprow][tempcol - 1] = tempnum + 2;
+        }
+        else if (temprow == temp - 1 && tempcol > n - temp)
+        {
+            a[temprow][tempcol] = tempnum;
+            tempcol--;
+        }
+        else if (tempcol == n - temp && temprow > n - temp + 1)
+        {
+            a[temprow][tempcol] = tempnum;
+            if (temprow - tempcol == 2)
+                temp--;
+            temprow--;
+        }
+        tempnum++;
+    }
+}
+
+int main()
+{
+    int a[50][100];
+    int n;
+    cout << "Input n: ";
+    cin >> n;
+    CreateSpiralArray(a, n);
+    PrintMatrix(a, n);
+    return 0;
+}
