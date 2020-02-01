@@ -1,0 +1,58 @@
+#include <iostream>
+#define MAX 8
+
+int a[MAX][MAX] = { 0 };
+int count = 0;
+
+void printboard()
+{
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+           std::cout << a[i][j] << " ";
+        std::cout << std::endl;
+    }
+}
+
+void knightlocate(int x, int y)
+{
+    count++;
+    a[x][y] = count;
+    if (count == 64)
+    {
+        std::cout << "The knight's step: " << std::endl;
+        printboard();
+        exit(0);
+    }
+    for (int i = -2; i <= 2; i++)
+        for (int j = -2; j <= 2; j++)
+        {
+            if (i + j == -3 || i + j == 3 || i - j == 3 || i - j == -3)
+            {
+                int xNew = i + x;
+                int yNew = j + y;
+                if (xNew >= 0 && yNew >= 0 && xNew < 8 && yNew < 8 && a[xNew][yNew] == 0)
+                    knightlocate(xNew, yNew);
+            }
+        }
+    count--;
+    a[x][y] = 0;
+
+}
+
+int main()
+{
+    int x, y;
+    std::cout << "Input the coordinate X Y of the knight in the chessboard: ";
+    std::cin >> x >> y;
+    while (x <= 0 && y <=0 && x > 8 && y > 8)
+    {
+        std::cout << "INVALID INPUT ! ";
+        std::cin >> x >> y;
+    }
+    x--;
+    y--;
+    knightlocate(x, y);
+    return 0;
+}
+
